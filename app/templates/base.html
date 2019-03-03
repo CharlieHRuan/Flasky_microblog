@@ -1,0 +1,31 @@
+<html>
+    <head>
+        {% if title %}
+            <title>{{ title }} - microblog</title>
+        {% else %}
+            <title>Welcome - microblog</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            Microblog : 
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('login') }}">Login</a>
+        </div>
+        <hr>
+        <!-- 使用with将当前flash()注册过的消息列表赋值给message -->
+        {% with messages = get_flashed_messages() %}
+        <!-- 判断消息列表是否有数据 -->
+        {% if messages %}
+        <ul>
+            <!-- 有数据，则循环读取消息，并展示到界面上 -->
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        <!-- block 控制语句来定义派生模板可以插入代码的位置 -->
+        {% block content %}{% endblock %}
+    </body>
+</html>

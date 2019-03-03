@@ -1,0 +1,35 @@
+<!-- 首先，第一步还是继承base模板，以便统一页面顶部 -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sign In</h1>
+<!-- action表示在提交的是偶应该请求的URL，action为空，将继续提交给当前地址栏的中URL,即当前页面 -->
+<!-- method指定了提交表单的请求方法使用表单提交推荐POST提交方式，这样不会将所有参数都展示到URL地址栏里面 -->
+<form action="" method="POST" novalidate>
+    <!-- 生成一个隐藏字段token，保护免受CSRF攻击 -->
+    {{ form.hidden_tag() }}
+    <p>
+        <!-- 模板页中没有对应的表单元素，是因为Flask-WTF可以自动识别这些，并生成例如input标签的形式 -->
+        <!-- 加上对应属性的标签 -->
+        {{ form.username.label }}<br>
+        <!-- 加上对应属性的值，并可以设置CSS，id等属性，这里我们设置长度不能超过32个字符 -->
+        {{ form.username(size=32) }}<br>
+        <!-- 将Username的错误信息遍历出来，并展示在输入框下方 -->
+        {% for errors in form.username.errors %}
+        <span style="color:red">[{{ errors }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.password.label }}<br>
+        {{ form.password(size=32) }}<br>
+        <!-- 将password的错误信息遍历出来，并展示在输入框下方 -->
+        {% for errors in form.password.errors %}
+        <span style="color:red">[{{ errors }}]</span>
+        {% endfor %}
+    </p>
+    <!-- 生成复选框按钮 -->
+    <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+    <!-- 生成提交按钮 -->
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
