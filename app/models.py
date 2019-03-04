@@ -5,7 +5,6 @@ class User(db.Model):
     # User类继承自db.Model基类
     # db.Column()传入字段类型，字段可索引（对数据检索很重要），字段唯一
     id = db.Column(db.Integer, primary_key=True)
-    # 用户名
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
