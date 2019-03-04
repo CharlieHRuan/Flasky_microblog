@@ -32,6 +32,7 @@ class Post(db.Model):
     # 默认一个用户发表状态的时间，utcnow表示函数本身，而不是其返回值
     # 在服务器中使用当前时间，可以根据用户所在位置获取当前时间
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    
     # 设置外键，引用user表的主键，
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
