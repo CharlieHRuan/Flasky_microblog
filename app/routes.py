@@ -1,8 +1,8 @@
 # 导入render_template
 from flask import render_template, flash, redirect, url_for
 from app import app
-# 从app.form模块中导入LoginForm类
-from app.form import LoginForm
+# 从app.form模块中导入LoginForm类,导入注册表单
+from app.form import LoginForm, RegistrationForm
 from flask_login import current_user, login_user
 from app.models import User
 # 设置用户登出函数
@@ -11,13 +11,13 @@ from flask_login import logout_user
 from flask_login import login_required
 from flask import request
 from werkzeug.urls import url_parse
+from app import db
 
 # 装饰器：会修改跟在其后的函数，经常使用他们将函数注册为某些事件的回调函数
 
 
 @app.route('/')
 @app.route('/index')
-# 设置当前页面需要登录才能查看
 def index():
     user = {'username': 'RuanHeng'}
     posts = [
@@ -55,7 +55,6 @@ def login():
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
-        print("====url_for：====", url_for(next_page))
         return redirect(next_page)
     return render_template('login.html', title='Sign In', form=form)
 
@@ -68,6 +67,24 @@ def logout():
 
 
 @app.route('/about')
+# 设置当前页面需要登录才能查看
 @login_required
 def about():
     return render_template('about.html')
+
+
+# 注册页面
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    # 如果当前用户已经登录，则重定向到index
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('login'))
+    return render_template('register.html', title='Register', form=form)
