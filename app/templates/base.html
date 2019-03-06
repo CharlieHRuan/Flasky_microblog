@@ -10,7 +10,12 @@
         <div>
             Microblog : 
             <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+            <a href="{{ url_for('about') }}">About</a>
         </div>
         <hr>
         <!-- 使用with将当前flash()注册过的消息列表赋值给message -->
@@ -20,7 +25,7 @@
         <ul>
             <!-- 有数据，则循环读取消息，并展示到界面上 -->
             {% for message in messages %}
-            <li>{{ message }}</li>
+                <li>{{ message }}</li>
             {% endfor %}
         </ul>
         {% endif %}

@@ -4,7 +4,11 @@
 <!-- 这个块，就是模板中对应的块，标识一下，最终会将这个块内部的代码插入到模板中，从而形成新的界面 -->
 {% block content %}
     <!-- 里面的内容和之前这个页面的内容没什么区别 -->
-    <h1>Hi,{{ user.username }}</h1>
+    {% if current_user.username %}    
+    <h1>Hi,{{ current_user.username }}!</h1>
+    {% else %}
+    <h1>Hi,Welcome.</h1>
+    {% endif %}
     {% for post in posts %}
     <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
     {% endfor %}
