@@ -1,3 +1,4 @@
+from hashlib import md5
 from datetime import datetime
 from app import db
 from app import login
@@ -15,6 +16,11 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     # 这不是实际的数据库字段，而是用户和其动态关系的高级师徒，因此它不在表中
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+
+    # 丰富个人主页信息
+    # 添加个人介绍，个人最后访问时间
+    about_me = db.Column(db.String(140))
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         """
@@ -37,6 +43,16 @@ class User(UserMixin, db.Model):
     @login.user_loader
     def load_user(id):
         return User.query.get(int(id))
+
+    def avatar(self, size):
+        """
+        生成随机图片
+        """
+        # 根据用户邮箱，生成md5哈希值，如果是没有注册的用户，则自动根据邮箱的哈希值生成随机头像
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+            digest, size
+        )
 
 
 class Post(db.Model):

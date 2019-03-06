@@ -12,6 +12,8 @@ from flask_login import login_required
 from flask import request
 from werkzeug.urls import url_parse
 from app import db
+# 导入时间模块，我们需要记录最后一次用户请求操作时间
+from datetime import datetime
 
 # 装饰器：会修改跟在其后的函数，经常使用他们将函数注册为某些事件的回调函数
 
@@ -88,3 +90,24 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+
+# 个人主页
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
+
+
+# 记录最后一次请求时间，每次请求之前调用该函数
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        # 使用国际化时间，不能使用当前系统时间
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
