@@ -21,5 +21,4 @@ login = LoginManager(app)
 # 设置login用于处理登录验证，以便需要用户登录查看的界面，必须登录后才能查看
 login.login_view = 'login'
 
-from app import routes, models 
-
+from app import routes, models, errors
