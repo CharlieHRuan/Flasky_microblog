@@ -2,7 +2,7 @@
 from flask import render_template, flash, redirect, url_for
 from app import app
 # 从app.form模块中导入LoginForm类,导入注册表单
-from app.form import LoginForm, RegistrationForm
+from app.form import LoginForm, RegistrationForm, EditProfileForm
 from flask_login import current_user, login_user
 from app.models import User
 # 设置用户登出函数
@@ -111,3 +111,25 @@ def before_request():
         # 使用国际化时间，不能使用当前系统时间
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+
+
+# 编辑用户状态路由
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditProfileForm()
+    # 如果当前方法返回True，则提交表单数据到数据库
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('edit_profile'))
+    # 这块代码主要是用与默认当前个人信息的，第一次进入当前界面
+    # 会默认数据库中已有的数据，使用的GET请求
+    # 如果提交表单出错，则代表POST提交，不执行
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.about_me.data = current_user.about_me
+    return render_template('edit_profile.html', title='Edit Profile',
+                           form=form)
