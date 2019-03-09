@@ -15,25 +15,27 @@ from app import db
 # 导入时间模块，我们需要记录最后一次用户请求操作时间
 from datetime import datetime
 
+from app.form import PostForm
+from app.models import Post
+
 # 装饰器：会修改跟在其后的函数，经常使用他们将函数注册为某些事件的回调函数
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
+@login_required
 def index():
-    user = {'username': 'RuanHeng'}
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The avengers movie was so cool!'
-        }
-    ]
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('You post is now live!')
+        return redirect(url_for('index'))
+    posts = current_user.followed_posts().all()
     # 传入函数模板文件名，模板参数的变量列表，返回被渲染后的界面（被占位符替换后的结果）
-    return render_template('index.html', title='Home', posts=posts)
+    return render_template('index.html', title='Home Page',
+                           form=form, posts=posts)
 
 
 # Flask视图函数接受GET和POST请求，并且覆盖了默认的GET请求，因为HTTP协议规定GET请求需要返回信息给客户端（这里是浏览器）
@@ -177,3 +179,13 @@ def unfollow(username):
     flash('You are not following {}'.format(username))
     return redirect(url_for('user', username=username))
 
+
+# 添加发现模块，让用户可以看到所有用户的动态
+@app.route('/explore')
+@login_required
+def explore():
+    """
+    添加发现模块，让用户可以看到所有用户的动态
+    """
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('index.html', title='Explore', posts= posts)
