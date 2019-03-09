@@ -117,7 +117,7 @@ def before_request():
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
+    form = EditProfileForm(current_user.username)
     # 如果当前方法返回True，则提交表单数据到数据库
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -133,3 +133,47 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile',
                            form=form)
+
+
+# 关注用户
+@app.route('/follow/<username>')
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        # 未找到对应的用户
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('index'))
+    if user == current_user:
+        # 如果用户是当前用户
+        flash('You cannot follow yourself!')
+        print("关注成功跳转：", url_for('user', username=username))
+        return redirect(url_for('user', username=username))
+    current_user.follow(user)
+    db.session.commit()
+    flash('You are following {}!'.format(username))
+    return redirect(url_for('user', username=username))
+
+
+# 取关用户
+@app.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    """
+    取消关注用户路由
+    """
+    user = User.query.filter_by(username=username).first()
+    print(user)
+    if user is None:
+        # 未找到当前用户
+        flash('User {} not found.'.format(username))
+        redirect(url_for('index'))
+    if user == current_user:
+        flash('You cannot unfollow yourself!')
+        print("取关成功跳转：", url_for('user', username=username))
+        return redirect(url_for('user', username=username))
+    current_user.unfollow(user)
+    db.session.commit()
+    flash('You are not following {}'.format(username))
+    return redirect(url_for('user', username=username))
+

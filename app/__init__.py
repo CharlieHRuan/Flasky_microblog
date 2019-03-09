@@ -51,8 +51,8 @@ if not app.debug:
         if not os.path.exists('logs'):
             os.mkdir('logs')
         # 确保创建文件单个大小在10kb，并只保留最后10个文件作为备份
-        file_handler = RotatingFileHandler('logs/microblog.log', maxBytes=10240, 
-                                            backupCount=10)
+        file_handler = RotatingFileHandler(
+            'logs/microblog.log', maxBytes=10240, backupCount=10)
         # 设置日志文件格式
         # 时间戳、错误级别、信息、日志来源的源代码文件、行号
         file_handler.setFormatter(logging.Formatter(
@@ -66,4 +66,3 @@ if not app.debug:
         app.logger.setLevel(logging.INFO)
         # 服务器每次启动的时候，都会写入一行表示服务器启动
         app.logger.info('Microblog startup')
-

@@ -7,6 +7,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
 
+followers = db.Table(
+    'followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+)
+
+
 class User(UserMixin, db.Model):
     # User类继承自db.Model基类
     # db.Column()传入字段类型，字段可索引（对数据检索很重要），字段唯一
@@ -53,6 +60,51 @@ class User(UserMixin, db.Model):
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
             digest, size
         )
+
+    # 声明用户的多对多关系
+    # 代表左侧用户（followed）关注右侧用户（follower）
+    followed = db.relationship(
+        'User', secondary=followers,
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'),
+        lazy='dynamic'
+    )
+
+    # 添加、删除关注关系
+    def follow(self, user):
+        """
+        关注某用户
+        """
+        if not self.is_following(user):
+            self.followed.append(user)
+
+    def unfollow(self, user):
+        """
+        取消关注某用户
+        """
+        if self.is_following(user):
+            self.followed.remove(user)
+
+    def is_following(self, user):
+        """
+        判断当前用户是否已关注传入参数的这个用户
+        """
+        return self.followed.filter(
+            followers.c.followed_id == user.id).count() > 0
+
+    def followed_posts(self):
+        """
+        查询自身动态，以及关注用户的动态，合并到一块展示,按照最新发布时间排序
+        """
+        # 查询当前用户已关注用户的动态
+        followed = Post.query.join(
+            followers, (followers.c.followed_id == Post.user_id)).filter(
+            followers.c.follower_id == self.id)
+        # 查询自身动态
+        own = Post.query.filter_by(user_id=self.id)
+        # 使用union将二者查询出的数据合并到一块返回，按照动态发布时间排序
+        return followed.union(own).order_by(Post.timestamp.desc())
 
 
 class Post(db.Model):
