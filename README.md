@@ -11,5 +11,5 @@
 6. 系统自身记录所有操作日志
 7. 添加用户动态分页功能
 
-## FLask 笔记
+## Flask 笔记
 [Ruan's Blog](https://wuhaaaaa.github.io/)
