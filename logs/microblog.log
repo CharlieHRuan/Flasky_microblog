@@ -66,3 +66,4 @@ Traceback (most recent call last):
     % ",".join("'%s'" % c for c in mapper.primary_key)
 sqlalchemy.exc.InvalidRequestError: Incorrect number of values in identifier to formulate primary key for query.get(); primary key columns are 'user.id'
 2019-03-11 21:51:03,367 INFO: Microblog startup [in /home/ruanheng/MicroBlog/app/__init__.py:72]
+2019-03-12 06:07:09,920 INFO: Microblog startup [in /home/ruanheng/MicroBlog/app/__init__.py:72]
