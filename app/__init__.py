@@ -13,6 +13,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 # 添加应用登录插件
 from flask_login import LoginManager
+# 添加邮件发送功能
+from flask_mail import Mail
 
 # 代表当前app实例
 app = Flask(__name__)
@@ -26,6 +28,8 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 # 设置login用于处理登录验证，以便需要用户登录查看的界面，必须登录后才能查看
 login.login_view = 'login'
+# 添加邮件发送实例
+mail = Mail(app)
 
 from app import routes, models, errors
 

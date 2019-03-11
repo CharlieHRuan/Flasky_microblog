@@ -23,6 +23,6 @@ class Config(object):
     # 密码
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     # 收到错误邮件的地址
-    ADMINS = ['ruanheng159@163.com']
+    ADMINS = ['ruanheng1995@gmail.com']
     # 配置分页，每页的数据展示量
     POSTS_PER_PAGE = 25

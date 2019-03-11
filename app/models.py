@@ -6,6 +6,9 @@ from app import login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+from time import time
+import jwt
+from app import app
 
 followers = db.Table(
     'followers',
@@ -105,6 +108,27 @@ class User(UserMixin, db.Model):
         own = Post.query.filter_by(user_id=self.id)
         # 使用union将二者查询出的数据合并到一块返回，按照动态发布时间排序
         return followed.union(own).order_by(Post.timestamp.desc())
+
+    def get_reset_password_token(self, expire_in=600):
+        """
+        生成重置密码令牌
+        """
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expire_in},
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    # 静态方法，可以直接在类中调用
+    @staticmethod
+    def verify_reset_password_token(token):
+        """
+        验证重置密码令牌
+        """
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return User.query.get(id)
 
 
 class Post(db.Model):

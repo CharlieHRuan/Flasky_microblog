@@ -15,8 +15,12 @@ from app import db
 # 导入时间模块，我们需要记录最后一次用户请求操作时间
 from datetime import datetime
 
-from app.form import PostForm
+from app.form import PostForm, ResetPasswordRequestForm
 from app.models import Post
+from app.email import send_password_reset_email
+
+from app.form import ResetPasswordForm
+
 
 # 装饰器：会修改跟在其后的函数，经常使用他们将函数注册为某些事件的回调函数
 
@@ -217,3 +221,43 @@ def explore():
         if posts.has_prev else None
     return render_template('index.html', title='Explore', posts=posts.items,
                            next_url=next_url, prev_url=prev_url)
+
+
+# 重置密码
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    """
+    重置密码
+    """
+    # 如果用户已经登录，那么重置密码没有意义，必须是非登录用户
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)
+        flash('Check you email for the instruction to reset your password')
+        return redirect(url_for('login'))
+    return render_template('reset_password_request.html',
+                           title='Rqset Password', form=form)
+
+
+# 重置密码
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    # 查看当前用户是否已经登录
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    # 根据验证路径，查看是否存在相应的用户
+    user = User.verify_reset_password_token(token)
+    print(user.username)
+    if not user:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form=form)
