@@ -12,6 +12,7 @@
 7. 添加用户动态分页功能
 8. 添加用户重置密码功能，发送邮件验证
 9. 美化当前系统，引入Bootstrap
+10. 本地化时间
 
 ## Flask 笔记
 [Ruan's Blog](https://wuhaaaaa.github.io/)

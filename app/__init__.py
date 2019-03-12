@@ -17,6 +17,8 @@ from flask_login import LoginManager
 from flask_mail import Mail
 # 添加FLask-Bootstrap框架
 from flask_bootstrap import Bootstrap
+# 导入Moment包，以便处理本地化时间
+from flask_moment import Moment
 
 # 代表当前app实例
 app = Flask(__name__)
@@ -34,6 +36,8 @@ login.login_view = 'login'
 mail = Mail(app)
 # 添加Bootstrap实例
 bootstrap = Bootstrap(app)
+# 实例化Moment
+moment = Moment(app)
 
 
 from app import routes, models, errors

@@ -4,6 +4,7 @@
     {% if title %}{{ title }} - Microblog{% else %}WelCome to Microblog{% endif %}
 {% endblock %}
 
+
 {% block navbar %}
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
@@ -58,4 +59,7 @@
 {% endblock %}
 
 
-
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}
