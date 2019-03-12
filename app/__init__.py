@@ -15,6 +15,8 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 # 添加邮件发送功能
 from flask_mail import Mail
+# 添加FLask-Bootstrap框架
+from flask_bootstrap import Bootstrap
 
 # 代表当前app实例
 app = Flask(__name__)
@@ -30,6 +32,9 @@ login = LoginManager(app)
 login.login_view = 'login'
 # 添加邮件发送实例
 mail = Mail(app)
+# 添加Bootstrap实例
+bootstrap = Bootstrap(app)
+
 
 from app import routes, models, errors
 

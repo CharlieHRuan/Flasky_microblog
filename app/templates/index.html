@@ -1,8 +1,9 @@
 <!-- 继承自模板base.html -->
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 <!-- 这个块，就是模板中对应的块，标识一下，最终会将这个块内部的代码插入到模板中，从而形成新的界面 -->
-{% block content %}
+{% block app_content %}
     <!-- 里面的内容和之前这个页面的内容没什么区别 -->
     {% if current_user.username %}    
     <h1>Hi,{{ current_user.username }}!</h1>
@@ -10,7 +11,9 @@
     <h1>Hi,Welcome.</h1>
     {% endif %}
     {% if form %}
-        <form action="" method="POST">
+    {{ wtf.quick_form(form) }}
+    <br>
+        <!-- <form action="" method="POST">
             {{ form.hidden_tag() }}
             <p>
                 {{ form.post.label }}<br>
@@ -20,16 +23,30 @@
                 {% endfor %}
             </p>
             <p>{{ form.submit() }}</p>
-        </form>
+        </form> -->
     {% endif %}
     {% for post in posts %}
     <!-- <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div> -->
         {%include '_post.html'%}
     {% endfor %}
-    {% if prev_url%}
+    <!-- {% if prev_url%}
     <a href="{{ prev_url }}">Newer posts</a>
     {% endif %}
     {% if next_url %}
     <a href="{{ next_url }}">Older posts</a>
-    {% endif %}
+    {% endif %} -->
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#'}}">
+                    <span aria-hidden="true">&larr;</span> Newer posts
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#'}}">
+                    Older post <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}

@@ -25,4 +25,4 @@ class Config(object):
     # 收到错误邮件的地址
     ADMINS = ['ruanheng1995@gmail.com']
     # 配置分页，每页的数据展示量
-    POSTS_PER_PAGE = 25
+    POSTS_PER_PAGE = 3
