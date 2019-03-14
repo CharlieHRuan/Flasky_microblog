@@ -1,0 +1,5 @@
+
+# 翻译文件
+messages.pot
+# Python
+*.py[cod]

@@ -13,6 +13,7 @@
 8. 添加用户重置密码功能，发送邮件验证
 9. 美化当前系统，引入Bootstrap
 10. 本地化时间
+11. 翻译模块
 
 ## Flask 笔记
 [Ruan's Blog](https://wuhaaaaa.github.io/)

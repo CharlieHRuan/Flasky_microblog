@@ -26,3 +26,5 @@ class Config(object):
     ADMINS = ['ruanheng1995@gmail.com']
     # 配置分页，每页的数据展示量
     POSTS_PER_PAGE = 3
+    # 设置支持的语言列表,英语，中文，西班牙语
+    LANGUAGES = ['en', 'zh', 'es']

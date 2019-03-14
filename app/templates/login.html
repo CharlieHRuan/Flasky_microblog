@@ -3,7 +3,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block app_content %}
-    <h1>Sign In</h1>
+    <h1>{{ _('Sign In') }}</h1>
     <!-- action表示在提交的是偶应该请求的URL，action为空，将继续提交给当前地址栏的中URL,即当前页面 -->
     <!-- method指定了提交表单的请求方法使用表单提交推荐POST提交方式，这样不会将所有参数都展示到URL地址栏里面 -->
 
@@ -13,9 +13,9 @@
         </div>
     </div>
     <br>
-    <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+    <p>{{ _('New User?')}} <a href="{{ url_for('register') }}">{{ _('Click to Register!')}}</a></p>
     <p>
-        Forget Your Password
-        <a href="{{ url_for('reset_password_request') }}">Click to Result It</a>
+        {{ _('Forget Your Password?') }}
+        <a href="{{ url_for('reset_password_request') }}">{{ _('Click to Result It') }}</a>
     </p>
 {% endblock %}

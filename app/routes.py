@@ -9,7 +9,7 @@ from app.models import User
 from flask_login import logout_user
 # 设置登录认证，要求匿名用户必须登录后才能访问，用于保护某个视图
 from flask_login import login_required
-from flask import request
+from flask import request, g
 from werkzeug.urls import url_parse
 from app import db
 # 导入时间模块，我们需要记录最后一次用户请求操作时间
@@ -20,6 +20,9 @@ from app.models import Post
 from app.email import send_password_reset_email
 
 from app.form import ResetPasswordForm
+
+# 导入翻译模块
+from flask_babel import _, get_locale
 
 
 # 装饰器：会修改跟在其后的函数，经常使用他们将函数注册为某些事件的回调函数
@@ -137,6 +140,7 @@ def before_request():
         # 使用国际化时间，不能使用当前系统时间
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+    g.locale = str(get_locale)
 
 
 # 编辑用户状态路由

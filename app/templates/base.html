@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-    {% if title %}{{ title }} - Microblog{% else %}WelCome to Microblog{% endif %}
+    {% if title %}{{ title }} - Microblog{% else %}{{ _('WelCome to Microblog') }}{% endif %}
 {% endblock %}
 
 
@@ -22,8 +22,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li class=""><a href="{{ url_for('index') }}">Home</a></li>
-                    <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                    <li class=""><a href="{{ url_for('index') }}">{{ _('Home')}}</a></li>
+                    <li><a href="{{ url_for('explore') }}">{{ _('Explore')}}</a></li>
                 </ul>
                 <!-- <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
@@ -33,10 +33,10 @@
                 </form> -->
                 <ul class="nav navbar-nav navbar-right">
                     {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('login') }}">{{ _('Login') }}</a></li>
                     {% else %}
-                    <li><a href="{{ url_for('user', username=current_user.username) }}">Profile</a></li>
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
+                    <li><a href="{{ url_for('logout') }}">{{ _('Logout')}}</a></li>
                     {% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->
