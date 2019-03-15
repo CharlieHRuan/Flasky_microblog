@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-03-15 05:33+0800\n"
+"POT-Creation-Date: 2019-03-15 07:13+0800\n"
 "PO-Revision-Date: 2019-03-13 21:58+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_CN\n"
@@ -38,7 +38,7 @@ msgstr "密码"
 msgid "Remember me"
 msgstr "记住我(下次不需输入，直接登录)"
 
-#: app/form.py:19 app/templates/login.html:6
+#: app/form.py:19 app/routes.py:81 app/templates/login.html:6
 msgid "Sign In"
 msgstr "登录"
 
@@ -50,7 +50,7 @@ msgstr "邮箱"
 msgid "Repeat Password"
 msgstr "重置密码"
 
-#: app/form.py:32 app/templates/register.html:5
+#: app/form.py:32 app/routes.py:112 app/templates/register.html:5
 msgid "Register"
 msgstr "注册"
 
@@ -82,6 +82,69 @@ msgstr "说点什么..."
 msgid "Request Password Reset"
 msgstr "重置密码"
 
+#: app/routes.py:40
+msgid "You post is now live!"
+msgstr "发帖成功！"
+
+#: app/routes.py:53 app/templates/base.html:25
+msgid "Home"
+msgstr "首页"
+
+#: app/routes.py:73
+msgid "Invalid username or password"
+msgstr "用户名或密码无效！"
+
+#: app/routes.py:110
+msgid "Congratulations, you are now a registered user!"
+msgstr "恭喜，您现在是注册用户！"
+
+#: app/routes.py:156
+msgid "Your changes have been saved."
+msgstr "变更成功."
+
+#: app/routes.py:164 app/templates/edit_profile.html:5
+msgid "Edit Profile"
+msgstr "编辑个人信息"
+
+#: app/routes.py:176 app/routes.py:201
+#, python-format
+msgid "User %(username)s not found."
+msgstr "没有 %(username)s 这个用户."
+
+#: app/routes.py:180
+msgid "You cannot follow yourself!"
+msgstr "你不能关注你自己!"
+
+#: app/routes.py:186
+#, python-format
+msgid "You are following %(username)s!"
+msgstr "你关注了 %(username)s!"
+
+#: app/routes.py:205
+msgid "You cannot unfollow yourself!"
+msgstr "你不能取关你自己!"
+
+#: app/routes.py:210
+#, python-format
+msgid "You are not following %(username)s"
+msgstr "你取消了关注 %(username)s"
+
+#: app/routes.py:229 app/templates/base.html:26
+msgid "Explore"
+msgstr "发现"
+
+#: app/routes.py:247
+msgid "Check you email for the instruction to reset your password"
+msgstr "邮件已发送，请检查你的邮箱，进行重置密码"
+
+#: app/routes.py:250 app/templates/reset_password_request.html:5
+msgid "Reset Password"
+msgstr "重置密码"
+
+#: app/routes.py:268
+msgid "Your password has been reset."
+msgstr "密码重置成功."
+
 #: app/templates/404.html:4
 msgid "File Not Found"
 msgstr "文件未找到"
@@ -111,14 +174,6 @@ msgstr "欢迎访问"
 msgid "WelCome to Microblog"
 msgstr "欢迎访问 Microblog"
 
-#: app/templates/base.html:25
-msgid "Home"
-msgstr "首页"
-
-#: app/templates/base.html:26
-msgid "Explore"
-msgstr "发现"
-
 #: app/templates/base.html:36
 msgid "Login"
 msgstr "登录"
@@ -130,10 +185,6 @@ msgstr "个人主页"
 #: app/templates/base.html:39
 msgid "Logout"
 msgstr "退出"
-
-#: app/templates/edit_profile.html:5
-msgid "Edit Profile"
-msgstr "编辑个人信息"
 
 #: app/templates/index.html:9
 #, python-format
@@ -167,10 +218,6 @@ msgstr "点击这里重置"
 #: app/templates/reset_password.html:6
 msgid "Reset Your Password"
 msgstr "重置您的密码"
-
-#: app/templates/reset_password_request.html:5
-msgid "Reset Password"
-msgstr "重置密码"
 
 #: app/templates/user.html:8
 msgid "User"

@@ -12,8 +12,7 @@
                 </a>
             {% endset %}
             <!-- said 3 days ago  -->
-            {{ _('%(username)s said %(when)s',
-                username=user_link,when=moment(post.timestamp).fromNow()) }}
+            {{ _('%(username)s said %(when)s',username=user_link,when=moment(post.timestamp).fromNow()) }}
             
             <!-- said {{ moment(post.timestamp).fromNow() }} -->
             <br>

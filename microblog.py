@@ -1,5 +1,5 @@
-# 从app包，导入成员app对象,db数据库对象
-from app import app, db
+# 从app包，导入成员app对象,db数据库对象, 自定义命令
+from app import app, db, cli
 
 # 从models中导入用户、动态对象
 from app.models import User, Post

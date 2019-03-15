@@ -46,8 +46,6 @@ moment = Moment(app)
 babel = Babel(app)
 
 
-from app import routes, models, errors
-
 # 仅当应用的DEBUG模式未开启的时候，我们才执行发送邮件
 if not app.debug:
     if app.config['MAIL_SERVER']:
@@ -90,7 +88,10 @@ if not app.debug:
 # 选择最匹配的语言
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    # return request.accept_languages.best_match(app.config['LANGUAGES'])
     # 强制选择相应语言展示翻译结果
     # return 'es'
-    # return 'zh'
+    return 'zh'
+
+
+from app import routes, models, errors
