@@ -146,3 +146,6 @@ class Post(db.Model):
 
     def __repr__(self):
         return "<Post {}>".format(self.body)
+
+    # 在用户提交的时候，确认当前发布的语言属于哪种
+    language = db.Column(db.String(5))

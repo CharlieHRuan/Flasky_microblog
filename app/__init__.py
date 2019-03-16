@@ -34,7 +34,7 @@ migrate = Migrate(app, db)
 # 添加登录对象
 login = LoginManager(app)
 # 设置login用于处理登录验证，以便需要用户登录查看的界面，必须登录后才能查看
-login.login_view = 'login'
+login.login_view = 'auth.login'
 login.login_message = _l('Please log in to access this page')
 # 添加邮件发送实例
 mail = Mail(app)
@@ -45,6 +45,13 @@ moment = Moment(app)
 # 实例化翻译插件
 babel = Babel(app)
 
+# 注册blueprint
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
+from app.auth import bp as auth_bp
+app.register_blueprint(auth_bp, url_prefix='/auth')
+from app.main import bp as main_bp
+app.register_blueprint(main_bp)
 
 # 仅当应用的DEBUG模式未开启的时候，我们才执行发送邮件
 if not app.debug:
@@ -73,7 +80,8 @@ if not app.debug:
         # 设置日志文件格式
         # 时间戳、错误级别、信息、日志来源的源代码文件、行号
         file_handler.setFormatter(logging.Formatter(
-            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+            '%(asctime)s %(levelname)s: %(message)s  \
+                [in %(pathname)s:%(lineno)d]'))
         # 设置日志级别，什么等级的信息，才记录在日志文件中，这里选用INFO级别
         # 级别递增
         # DEBUG、INFO、WARNING、ERROR、CRITICAL
@@ -94,4 +102,4 @@ def get_locale():
     return 'zh'
 
 
-from app import routes, models, errors
+from app import models
