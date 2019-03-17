@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, \
     request, g
-from app import app
+from app import current_app
 from app.main.forms import PostForm, EditProfileForm
 from flask_login import login_required, current_user
 from app.models import User, Post
@@ -30,7 +30,7 @@ def index():
         return redirect(url_for('main.index'))
     page = request.args.get('page', 1, type=int)
     posts = current_user.followed_posts().paginate(
-        page, app.config['POSTS_PER_PAGE'], False
+        page, current_app.config['POSTS_PER_PAGE'], False
     )
     # 如果下一页还有数据，那么next_url就有值
     next_url = url_for('main.index', page=posts.next_num) \
@@ -59,7 +59,7 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(
-        page, app.config['POSTS_PER_PAGE'], False
+        page, current_app.config['POSTS_PER_PAGE'], False
     )
     next_url = url_for('main.user', username=user.username, page=posts.next_num) \
         if posts.has_next else None
@@ -160,7 +160,7 @@ def explore():
     """
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
-        page, app.config['POSTS_PER_PAGE'], False
+        page, current_app.config['POSTS_PER_PAGE'], False
     )
     next_url = url_for('main.explore', page=posts.next_num) \
         if posts.has_next else None

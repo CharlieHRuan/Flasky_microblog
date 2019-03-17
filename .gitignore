@@ -3,3 +3,4 @@
 messages.pot
 # Python
 *.py[cod]
+*.env

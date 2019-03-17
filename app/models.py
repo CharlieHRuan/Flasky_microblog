@@ -8,7 +8,7 @@ from flask_login import UserMixin
 
 from time import time
 import jwt
-from app import app
+from app import current_app
 
 followers = db.Table(
     'followers',
@@ -115,7 +115,7 @@ class User(UserMixin, db.Model):
         """
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expire_in},
-            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+            current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
 
     # 静态方法，可以直接在类中调用
     @staticmethod
@@ -124,7 +124,7 @@ class User(UserMixin, db.Model):
         验证重置密码令牌
         """
         try:
-            id = jwt.decode(token, app.config['SECRET_KEY'],
+            id = jwt.decode(token, current_app.config['SECRET_KEY'],
                             algorithms=['HS256'])['reset_password']
         except:
             return
