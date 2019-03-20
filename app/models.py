@@ -9,12 +9,59 @@ from flask_login import UserMixin
 from time import time
 import jwt
 from app import current_app
+from app.search import add_to_index, query_index, remove_from_index
 
 followers = db.Table(
     'followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
 )
+
+
+class SearchableMixin(object):
+    @classmethod
+    def search(cls, expression, page, per_page):
+        """
+        将查询返回的动态ID，以及查询到的总数，重新组装数据
+        返回 查询到的模型，查询到的总数
+        """
+        ids, total = query_index(cls.__tablename__, expression, page, per_page)
+        if total == 0:
+            return cls.query.filter_by(id=0), 0
+        when = []
+        for i in range(len(ids)):
+            when.append((ids[i], i))
+        return cls.query.filter(cls.id.in_(ids)).order_by(
+            db.case(when, value=cls.id)), total
+
+    @classmethod
+    def before_commit(cls, session):
+        """提交前处理数据"""
+        session._changes = {
+            'add': [obj for obj in session.new if isinstance(obj, cls)],
+            'update': [obj for obj in session.dirty if isinstance(obj, cls)],
+            'delete': [obj for obj in session.deleted if isinstance(obj, cls)]
+        }
+
+    @classmethod
+    def after_commit(cls, session):
+        """提交后处理数据"""
+        for obj in session._changes['add']:
+            add_to_index(cls.__tablename__, obj)
+        for obj in session._changes['update']:
+            add_to_index(cls.__tablename__, obj)
+        for obj in session._changes['delete']:
+            remove_from_index(cls.__tablename__, obj)
+        session._changes = None
+
+    @classmethod
+    def reindex(cls):
+        """
+        重新将所有索引对象添加到Elasticsearch，功能类似于刷新，
+        因为ID只要一致，那么数据源发生改变，索引名称不便，则会改变数据中的值
+        """
+        for obj in cls.query:
+            add_to_index(cls.__tablename__, obj)
 
 
 class User(UserMixin, db.Model):
@@ -131,10 +178,11 @@ class User(UserMixin, db.Model):
         return User.query.get(id)
 
 
-class Post(db.Model):
+class Post(SearchableMixin, db.Model):
     """
     用户发表状态
     """
+    __searchable__ = ['body']
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     # 默认一个用户发表状态的时间，utcnow表示函数本身，而不是其返回值
@@ -149,3 +197,7 @@ class Post(db.Model):
 
     # 在用户提交的时候，确认当前发布的语言属于哪种
     language = db.Column(db.String(5))
+
+
+db.event.listen(db.session, 'before_commit', Post.before_commit)
+db.event.listen(db.session, 'after_commit', Post.after_commit)

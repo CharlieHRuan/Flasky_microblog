@@ -21,6 +21,9 @@ from flask_moment import Moment
 # 导入Babel，用于翻译
 from flask_babel import Babel, lazy_gettext as _l
 
+# 导入全文搜索服务
+from elasticsearch import Elasticsearch
+
 db = SQLAlchemy()
 # 添加数据库迁移引擎
 migrate = Migrate()
@@ -54,6 +57,10 @@ def create_app(config_class=Config):
     moment.init_app(app)
     babel.init_app(app)
 
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
+        if app.config['ELASTICSEARCH_URL'] else None
+
+
     # 注册blueprint
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
@@ -63,6 +70,8 @@ def create_app(config_class=Config):
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
+
+
 
     # 仅当应用的DEBUG模式未开启的时候，我们才执行发送邮件
     # 当测试模式的时候app.testing返回true，所以当我们执行测试的时候，不应当记录日志

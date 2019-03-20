@@ -30,3 +30,6 @@ class Config(object):
     POSTS_PER_PAGE = 3
     # 设置支持的语言列表,英语，中文，西班牙语
     LANGUAGES = ['en', 'zh', 'es']
+    # 配置全文搜索服务地址
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+    POSTS_PER_PAGE = 25

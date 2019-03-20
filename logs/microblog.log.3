@@ -1,4 +1,35 @@
-2019-03-11 21:31:25,209 ERROR: Exception on /reset_password_request [POST] [in /home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py:1761]
+2019-03-16 22:37:23,484 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-16 22:43:42,727 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-16 22:50:07,758 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 11:58:48,701 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:03:06,230 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:07:47,241 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:12:49,385 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:47:41,693 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:48:08,654 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:48:37,073 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:49:37,012 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:50:52,877 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:51:28,599 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:51:46,308 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-17 12:54:47,270 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-18 21:57:03,922 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-19 21:24:17,324 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-19 21:27:19,023 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-19 21:27:26,771 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-19 21:28:58,668 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-19 21:36:22,403 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-19 21:40:12,417 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-19 21:41:34,027 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-19 21:47:45,616 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-19 21:50:39,962 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 06:32:41,488 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 06:35:53,532 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 06:36:42,730 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 06:38:51,210 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 06:40:36,090 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 07:22:29,948 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 07:23:55,785 ERROR: Exception on /index [GET]                  [in /home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py:1761]
 Traceback (most recent call last):
   File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,9 +43,10 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/ruanheng/MicroBlog/app/routes.py", line 239, in reset_password_request
-    send_password_reset_email(user)
-  File "/home/ruanheng/MicroBlog/app/email.py", line 42, in send_password_reset_email
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/ruanheng/MicroBlog/app/main/routes.py", line 45, in index
+    prev_url=prev_url)
   File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
     context, ctx.app)
   File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
@@ -27,102 +59,21 @@ Traceback (most recent call last):
     reraise(exc_type, exc_value, tb)
   File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
     raise value.with_traceback(tb)
-  File "/home/ruanheng/MicroBlog/app/templates/email/reset_password.html", line 5, in top-level template code
-    <a href="{{ url_for('reset_password ', token=token, _external=True) }}">
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/helpers.py", line 345, in url_for
-    force_external=external)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/werkzeug/routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'reset_password ' with values ['token']. Did you mean 'reset_password' instead?
-2019-03-11 21:34:35,660 ERROR: Exception on /reset_password_request [POST] [in /home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/ruanheng/MicroBlog/app/routes.py", line 239, in reset_password_request
-    send_password_reset_email(user)
-  File "/home/ruanheng/MicroBlog/app/email.py", line 42, in send_password_reset_email
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
-    context, ctx.app)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
-    rv = template.render(context)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/ruanheng/MicroBlog/app/templates/email/reset_password.html", line 5, in top-level template code
-    <a href="{{ url_for('reset_password', token=token, _external=True) }}">
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/helpers.py", line 345, in url_for
-    force_external=external)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/werkzeug/routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'reset_password ' with values ['token']. Did you mean 'reset_password' instead?
-2019-03-11 21:34:51,556 INFO: Microblog startup [in /home/ruanheng/MicroBlog/app/__init__.py:72]
-2019-03-11 21:34:58,763 ERROR: Exception on /reset_password_request [POST] [in /home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py:1761]
-Traceback (most recent call last):
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/ruanheng/MicroBlog/app/routes.py", line 239, in reset_password_request
-    send_password_reset_email(user)
-  File "/home/ruanheng/MicroBlog/app/email.py", line 32, in send_password_reset_email
-    user=user, token=token))
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
-    context, ctx.app)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
-    rv = template.render(context)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
-    return original_render(self, *args, **kwargs)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
-    return self.environment.handle_exception(exc_info, True)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
-    raise value.with_traceback(tb)
-  File "/home/ruanheng/MicroBlog/app/templates/email/reset_password.html", line 11, in top-level template code
-    <p>{{ url_for('reset_password ', token=token, _external=True) }}</p>
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/helpers.py", line 356, in url_for
-    return appctx.app.handle_url_build_error(error, endpoint, values)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 2061, in handle_url_build_error
-    reraise(exc_type, exc_value, tb)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
-    raise value
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/helpers.py", line 345, in url_for
-    force_external=external)
-  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/werkzeug/routing.py", line 1776, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'reset_password ' with values ['token']. Did you mean 'reset_password' instead?
+  File "/home/ruanheng/MicroBlog/app/templates/index.html", line 3, in top-level template code
+    {% import "bootstrap/wtf.html" as wtf %}
+  File "/home/ruanheng/MicroBlog/app/templates/base.html", line 1, in top-level template code
+    {% extends "bootstrap/base.html" %}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 21, in block "body"
+    {% block navbar %}
+  File "/home/ruanheng/MicroBlog/app/templates/base.html", line 31, in block "navbar"
+    {{ g.search_form.q(size=20, class='form-control',placeholder=g.search.q.label.text) }}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'flask.ctx._AppCtxGlobals object' has no attribute 'search'
+2019-03-20 12:48:54,876 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]

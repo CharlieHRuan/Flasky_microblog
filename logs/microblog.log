@@ -1,16 +1,118 @@
-2019-03-16 22:37:23,484 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-16 22:43:42,727 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-16 22:50:07,758 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 11:58:48,701 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:03:06,230 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:07:47,241 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:12:49,385 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:47:41,693 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:48:08,654 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:48:37,073 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:49:37,012 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:50:52,877 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:51:28,599 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:51:46,308 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-17 12:54:47,270 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
-2019-03-18 21:57:03,922 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:105]
+2019-03-20 13:11:34,547 ERROR: Exception on / [GET]                  [in /home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/ruanheng/MicroBlog/app/main/routes.py", line 45, in index
+    prev_url=prev_url)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 135, in render_template
+    context, ctx.app)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 117, in _render
+    rv = template.render(context)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ruanheng/MicroBlog/app/templates/index.html", line 3, in top-level template code
+    {% import "bootstrap/wtf.html" as wtf %}
+  File "/home/ruanheng/MicroBlog/app/templates/base.html", line 1, in top-level template code
+    {% extends "bootstrap/base.html" %}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
+    {% block doc -%}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 4, in block "doc"
+    {%- block html %}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 20, in block "html"
+    {% block body -%}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 21, in block "body"
+    {% block navbar %}
+  File "/home/ruanheng/MicroBlog/app/templates/base.html", line 31, in block "navbar"
+    {{ g.search_form.q(size=20, class='form-control',placeholder=g.search.q.label.text) }}
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'flask.ctx._AppCtxGlobals object' has no attribute 'search'
+2019-03-20 13:13:32,517 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 13:13:41,198 ERROR: Exception on /search [GET]                  [in /home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py:1761]
+Traceback (most recent call last):
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask_login/utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "/home/ruanheng/MicroBlog/app/main/routes.py", line 102, in search
+    next_url=next_url, prev_url=prev_url)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/flask/templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ruanheng/MicroBlog/app/templates/search.html", line 11, in template
+    <a href="{{ prev_url or #}}">
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/environment.py", line 497, in _parse
+    return Parser(self, source, name, encode_filename(filename)).parse()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 901, in parse
+    result = nodes.Template(self.subparse(), lineno=1)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 268, in parse_block
+    node.body = self.parse_statements(('name:endblock',), drop_needle=True)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 165, in parse_statements
+    result = self.subparse(end_tokens)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 875, in subparse
+    add_data(self.parse_tuple(with_condexpr=True))
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 620, in parse_tuple
+    args.append(parse())
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 432, in parse_expression
+    return self.parse_condexpr()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 437, in parse_condexpr
+    expr1 = self.parse_or()
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/parser.py", line 451, in parse_or
+    while self.stream.skip_if('name:or'):
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 347, in skip_if
+    return self.next_if(expr) is not None
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 343, in next_if
+    return next(self)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 359, in __next__
+    self.current = next(self._iter)
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 562, in wrap
+    for lineno, token, value in stream:
+  File "/home/ruanheng/MicroBlog/venv/lib/python3.6/site-packages/jinja2/lexer.py", line 739, in tokeniter
+    name, filename)
+jinja2.exceptions.TemplateSyntaxError: unexpected char '#' at 301
+2019-03-20 13:14:31,440 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
