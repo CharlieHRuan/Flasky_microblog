@@ -116,3 +116,8 @@ Traceback (most recent call last):
     name, filename)
 jinja2.exceptions.TemplateSyntaxError: unexpected char '#' at 301
 2019-03-20 13:14:31,440 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 19:26:27,677 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 19:39:39,411 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 20:59:29,143 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 20:59:42,804 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]
+2019-03-20 21:03:12,238 INFO: Microblog startup                  [in /home/ruanheng/MicroBlog/app/__init__.py:114]

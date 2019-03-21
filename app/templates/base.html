@@ -1,67 +1,76 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}
-    {% if title %}{{ title }} - Microblog{% else %}{{ _('WelCome to Microblog') }}{% endif %}
+{% if title %}{{ title }} - Microblog{% else %}{{ _('WelCome to Microblog') }}{% endif %}
 {% endblock %}
 
+{% block styles -%}
+{{super()}}
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href="{{ url_for("static", filename='font_icon/iconfont.css') }}" rel="stylesheet">
+{% endblock styles %}
 
 {% block navbar %}
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ url_for('main.index')}}">Microbolg</a>
-            </div>
-        
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav">
-                    <li class=""><a href="{{ url_for('main.index') }}">{{ _('Home')}}</a></li>
-                    <li><a href="{{ url_for('main.explore') }}">{{ _('Explore')}}</a></li>
-                </ul>
-                {% if g.search_form %}
-                <form class="navbar-form navbar-left" method="GET" action="{{ url_for('main.search') }}">
-                    <div class="form-group">
-                        {{ g.search_form.q(size=20, class='form-control',placeholder=g.search_form.q.label.text) }}
-                    </div>
-                </form>
-                {% endif %}
-                <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a></li>
-                    {% else %}
-                    <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
-                    <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout')}}</a></li>
-                    {% endif %}
-                </ul>
-            </div><!-- /.navbar-collapse -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('main.index')}}">Microbolg</a>
         </div>
-    </nav>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="{{ url_for('main.index') }}">{{ _('Home')}}</a></li>
+                <li><a href="{{ url_for('main.explore') }}">{{ _('Explore')}}</a></li>
+            </ul>
+            {% if g.search_form %}
+            <form class="navbar-form navbar-left" method="GET" action="{{ url_for('main.search') }}">
+                <div class="form-group">
+                    <i class="iconfont">&#xeb9c;</i>
+                    {{ g.search_form.q(size=20, class='form-control iconfont',placeholder=g.search_form.q.label.text) }}
+                </div>
+            </form>
+            {% endif %}
+            <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_anonymous %}
+                <li><a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a></li>
+                {% else %}
+                <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout')}}</a></li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div>
+</nav>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-info" role="alert">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        
-        {% block app_content %}{% endblock %}
-    </div>
+<div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    {% block app_content %}{% endblock %}
+</div>
 {% endblock %}
 
 
 {% block scripts %}
-    {{ super() }}
-    {{ moment.include_moment() }}
-    {{ moment.lang(g.locale) }}
+{{ super() }}
+{{ moment.include_moment() }}
+{{ moment.lang(g.locale) }}
+<script>
+    $("#q").attr("placeholder","&#xeb9c;&nbsp;Search");
+</script>
 {% endblock %}
